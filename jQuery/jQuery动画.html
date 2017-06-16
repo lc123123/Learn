@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        .layout {
+            margin: 0 auto;
+            width: 600px;
+        }
+        
+        .btn-color {
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+        
+        .btn {
+            padding: 10px 15px;
+        }
+        
+        .scr-top {
+            padding: 10px 15px;
+            margin: 20px;
+            border: 1px solid #ccc;
+        }
+        
+        .distance {
+            color: red;
+        }
+        
+        .color-change {
+            border: 1px solid #ccc;
+            height: 100px;
+        }
+        
+        .pitch {
+            margin: 20px;
+            border: 1px solid #ccc;
+        }
+        
+        .ipt {
+            border-radius: 4px;
+            border: 5px solid #ccc;
+            width: 100px;
+            height: 50px;
+            margin: 20px;
+        }
+        .selected{
+            border: 1px solid #ccc;
+        }
+        #sel{
+            width: 100px;
+            height: 50px;
+        }
+        .sel-val{
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layout">
+        <div class="btn-color">
+            <h3>1.当点击$btn 时，让 $btn 的背景色变为红色再变为蓝色</h3>
+            <button class="btn">点我变色</button>
+        </div>
+
+        <div class="scr-top">
+            <h3>2.当窗口滚动时，取垂直滚动距离</h3>
+            <p class="distance">垂直滚动距离为：</p>
+        </div>
+
+        <div class="color-change">
+            <h4>3.当鼠标放置到$div 上，把$div 背景色改为红色，移出鼠标背景色变为白色</h4>
+        </div>
+
+        <div class="pitch">
+            <h3>4.当鼠标激活 input 输入框时让输入框边框变为蓝色，当输入框内容改变时把输入框里的文字小写变为大写，当输入框失去焦点时去掉边框蓝色，控制台展示输入框里的文字</h3>
+            <input type="text" class="ipt" placeholder="请输入小写字母">
+        </div>
+
+        <div class="selected">
+            <h3>5.当选择 select 后，获取用户选择的内容</h3>
+            <select name="" id="sel">
+                <option value="橘子">橘子</option>
+                <option value="苹果">苹果</option>
+                <option value="草莓">草莓</option>
+                <option value="西瓜">西瓜</option>
+                <option value="蓝莓">蓝莓</option>
+            </select>
+            <p>您选择的是：<span class="sel-val"></span></p>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+    <script>
+        $('.btn').on('click', function () {
+            $('.btn').css({ 'background': 'red' })
+            setTimeout(function () {
+                $('.btn').css({ 'background': 'blue' })
+            }, 1000)
+        })
+
+
+        $(window).on('scroll', function () {
+            $('.distance').text($(window).scrollTop())
+        })
+
+        $('.color-change').on('mouseenter', function () {
+            $('.color-change').css({ 'background': 'red' })
+        })
+        $('.color-change').on('mouseleave', function () {
+            $('.color-change').css({ 'background': '#fff' })
+        })
+
+        $('.ipt').on('focus',function(){
+            $(this).css({'border':'5px solid blue'})
+        })
+        $('.ipt').on('keyup',function(){
+            var value = $('.ipt').val().toUpperCase()
+            $('.ipt').val(value)
+        })
+        $('.ipt').on('blur',function(){
+            $(this).css({'border':'5px solid #fff'})
+            console.log($(this).val())
+        })
+
+        $('#sel').on('change',function(){
+            $('.sel-val').html($(this).val())
+        })
+    </script>
+</body>
+
+</html>

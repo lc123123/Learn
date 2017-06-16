@@ -1,0 +1,32 @@
+function Person(name,age){
+    this.name = name;
+    this.age = age;
+    this.sayName = function(){
+        console.log('My name is'+ ' ' + this.name)
+    }
+}
+
+var p1 = new Person('lan','23')
+
+
+
+
+
+
+function Car(name,color,status){
+    this.name = name;
+    this.color = color;
+    this.status = status
+}
+Car.prototype.run = function(){
+    this.status = 120;
+    console.log('run')
+}
+Car.prototype.stop = function(){
+    this.status = 0;
+    console.log('stop')
+}
+Car.prototype.getStatus = function(){
+    console.log(this.status)
+}
+var car1 = new Car('奔驰','黑色',120)

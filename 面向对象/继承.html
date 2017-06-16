@@ -1,0 +1,30 @@
+<script>
+    function Person(name, sex) {
+        this.name = name;
+        this.sex = sex
+    }
+
+    Person.prototype.getName = function () {
+        console.log(this.name)
+    };
+
+    function Male(name, sex, age) {
+        Person.call(this,name,sex)
+        this.age = age
+    }
+
+    Male.prototype = Object.create(Person.prototype)
+
+    Male.prototype.getAge = function () {
+        consoloe.log(this.age)
+    };
+
+    var ruoyu = new Male('若愚', '男', 27);
+    ruoyu.getName();
+
+
+
+
+
+
+</script>

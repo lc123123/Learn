@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>轮播</title>
+
+    <style>
+        ul,
+        li,
+        a {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        a {
+            text-decoration: none;
+        }
+        
+        .clearfix:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        
+        .carousel {
+            margin: 0 auto;
+            position: relative;
+            width: 790px;
+            height: 340px;
+            overflow: hidden;
+        }
+        .ct li{
+            float: left;
+        }
+        
+        .ct {
+            overflow: hidden;
+            position: absolute;
+        }
+
+        .ct img {
+            float: left;
+            width: 790px;
+        }
+        
+        .btn {
+            display: block;
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            color: #fff;
+            background: #000;
+            opacity: 0.3;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 36px;
+            font-size: 28px;
+            bottom: 50%;
+            margin-bottom: -21px;
+            display: none;
+        }
+        
+        .carousel:hover .btn {
+            display: block;
+        }
+        
+        .btn:hover {
+            opacity: 0.7;
+        }
+        
+        .btn-pre {
+            left: 10px;
+        }
+        
+        .btn-next {
+            right: 10px;
+        }
+        
+        .indicator {
+            position: absolute;
+            left: 50%;
+            bottom: 20px;
+            margin-left: -64px;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 4px 8px;
+        }
+        
+        .indicator li {
+            width: 12px;
+            height: 12px;
+            display: block;
+            float: left;
+            background: #fff;
+            border-radius: 50%;
+            margin-right: 8px;
+            cursor: pointer;
+        }
+        
+        .indicator li:last-child {
+            margin-right: 0;
+        }
+        .indicator .active{
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="carousel">
+        <ul class="ct clearfix">
+            <li data-index="0">
+                <a href="#"><img src="https://img20.360buyimg.com/da/jfs/t5743/229/1049569149/252158/5a495b22/592335eaN5bc639d8.jpg"
+                        alt=""></a>
+            </li>
+            <li data-index="1">
+                <a href="#"><img src="https://img1.360buyimg.com/da/jfs/t5896/203/1438573713/95070/ed369b37/5926a82dNd9158b95.jpg" alt=""></a>
+            </li>
+            <li data-index="2">
+                <a href="#"><img src="https://img1.360buyimg.com/da/jfs/t5203/150/2209217955/91754/45a304bf/59190892N97db5cbc.jpg" alt=""></a>
+            </li>
+            <li data-index="3">
+                <a href="#"><img src="https://img10.360buyimg.com/da/jfs/t6124/128/5127788/114174/9a6f7bb3/5924f7b5N8826b52c.jpg" alt=""></a>
+            </li>
+            <li data-index="4">
+                <a href="#"><img src="https://img1.360buyimg.com/da/jfs/t5629/44/1417213774/90935/b180c29/592655ddN0ccf680c.jpg" alt=""></a>
+            </li>
+            <li data-index="5">
+                <a href="#"><img src="https://img30.360buyimg.com/da/jfs/t5899/361/1559108010/92350/75409254/5927a564Nc6be8f5b.jpg" alt=""></a>
+            </li>
+        </ul>
+        <a class="btn btn-pre" href="#">
+            <</a>
+                <a class="btn btn-next" href="#">></a>
+                <ul class="indicator">
+                    <li class="active"></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+    <script>
+        var $ct = $('.ct'),
+            $preBtn = $('.btn-pre'),
+            $nextBtn = $('.btn-next'),
+            $indicator = $('.indicator');
+
+        var $lastImg = $ct.find('li').last(),
+            $firstImg = $ct.find('li').first();
+
+        var curPage = 0;
+        var imgLength = $ct.children().length;
+        var isAnimate = false;
+
+        $ct.prepend($lastImg.clone());
+        $ct.append($firstImg.clone());
+
+        $ct.width($firstImg.width() * $ct.children().length)
+        $ct.css('left', '-790px')
+
+        $nextBtn.on('click', function () {
+            playNext(1)
+        })
+
+        $preBtn.on('click', function () {
+            playPre(1)
+        })
+
+        function playNext(n) {
+            if(isAnimate) return;
+            isAnimate = true
+            $ct.animate({
+                left: '-='+n*$firstImg.width()
+            }, function () {
+                curPage += n
+                if (curPage === imgLength) {
+                    $ct.css('left', '-790px')
+                    curPage = 0
+                }
+                isAnimate = false;
+                setIndicator()
+            })
+        }
+
+        function playPre(n) {
+            if(isAnimate) return;
+            isAnimate = true
+            $ct.animate({
+                left: '+='+n*$firstImg.width()
+            }, function () {
+                curPage -= n
+                if (curPage < 0) {
+                    $ct.css('left', -(imgLength*$firstImg.width()))
+                    curPage = imgLength - 1
+                }
+                isAnimate = false
+                setIndicator()
+            })
+        }
+
+        $indicator.on('click','li',function(){
+            var index = $(this).index();
+            console.log($(this).index())
+            if(index>curPage){
+                playNext(index-curPage)
+            }else{
+                playPre(curPage-index)
+            }
+        })
+
+        function setIndicator(){
+            $indicator.children().removeClass('active').eq(curPage).addClass('active')
+        }
+    </script>
+</body>
+
+</html>

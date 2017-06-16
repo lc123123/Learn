@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jQuery加载更多</title>
+
+    <style>
+        ul,
+        li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        li {
+            border: 1px solid #ccc;
+            padding: 5px;
+            margin: 20px;
+        }
+        
+        a:hover {
+            background: springgreen;
+        }
+        
+        a {
+            display: block;
+            margin: 10px auto;
+            text-decoration: none;
+            border: 1px solid orangered;
+            border-radius: 3px;
+            color: orangered;
+            height: 50px;
+            width: 100px;
+            text-align: center;
+            line-height: 50px;
+        }
+        
+        li.hover {
+            background: indianred;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layout">
+        <ul class="ct">
+            <li>内容1</li>
+            <li>内容2</li>
+        </ul>
+        <a href="#" class="load-more">加载更多</a>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+    <script>
+        var $load = $('.load-more')
+        var cur = 3
+        $load.on('click', function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: '/loadMore',
+                dataType: 'json',
+                type: 'get',
+                data: {
+                    curIdx: cur,
+                    len: 5
+                },
+                success: function (json) {
+                    onSuccess(json)
+                },
+                error: function () {
+                    onError()
+                }
+            })
+        })
+
+        function onSuccess(json) {
+            cur += 5
+            append(json)
+        }
+
+        function append(arr) {
+            for (var i = 0; i < arr.length; i++) {
+                $('.ct').append('<li>' + arr[i] + '</li>')
+            }
+        }
+
+        $('.ct').on('mouseenter', 'li', function () {
+            $(this).addClass('hover')
+        })
+        $('.ct').on('mouseleave', 'li', function () {
+            $(this).removeClass('hover')
+        })
+    </script>
+</body>
+
+</html>

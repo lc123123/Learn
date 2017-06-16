@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GoTop</title>
+    <style>
+        .btn {
+            position: fixed;
+            right: 10px;
+            bottom: 10px;
+            background: red;
+            padding: 10px;
+        }
+        
+        .ct>li {
+            list-style: none;
+            margin: 10px;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layout">
+        <ul class="ct">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+            <li>9</li>
+            <li>10</li>
+            <li>11</li>
+            <li>12</li>
+            <li>13</li>
+            <li>14</li>
+            <li>15</li>
+            <li>16</li>
+            <li>17</li>
+            <li>18</li>
+            <li>19</li>
+            <li>20</li>
+        </ul>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+    <script>
+        function GoTop(ct, target) {
+            this.ct = ct;
+            this.target = $('<button class="btn">回到顶部</button>')
+        }
+
+        GoTop.prototype.bindEvent = function () {
+            var _this = this;
+            $(window).on('scroll', function () {
+                if ($(window).scrollTop() > 200) {
+                    _this.target.show()
+                } else {
+                    _this.target.hide()
+                }
+            })
+            this.target.on('click', function () {
+                $(window).scrollTop(0)
+            })
+        }
+
+        GoTop.prototype.createNode = function () {
+            this.ct.append(this.target)
+            this.target.hide()
+        }
+        var goTop = new GoTop($('.ct'))
+        goTop.createNode()
+        goTop.bindEvent()
+    </script>
+</body>
+
+</html>

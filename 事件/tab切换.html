@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>tab切换</title>
+    <style>
+        .clearfix::after{
+            content: '';
+            display: block;
+            clear: both;
+        }
+        ul,li{
+            padding: 0;
+            margin: 0;
+        }
+        li{
+            list-style: none;
+        }
+        .tab{
+            width: 600px;
+            border: 1px solid #ccc;
+            padding: 10px 10px;
+            margin: 20px auto;
+            border-radius: 4px;
+        }
+        .tab-header>li{
+            float: left;
+            border: 1px solid white;
+            border-bottom: transparent;
+            padding: 10px 30px;
+            cursor: pointer;
+            color: aqua;
+            border-radius: 4px 4px 0 0;
+        }
+        .tab-header .active{
+            color:brown;
+            border: 1px solid #ccc;
+            border-bottom: 1px solid white;
+            margin-bottom: -2px;
+        }
+        .tab-content>li{
+            border: 1px solid #ccc;
+            height: 200px;
+            padding: 20px;
+            display: none;
+        }
+        .tab-content .active{
+            display: block;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="tab">
+        <ul class="tab-header clearfix">
+            <li class="active">tab1</li>
+            <li>tab2</li>
+            <li>tab3</li>
+        </ul>
+        <ul class="tab-content">
+            <li class="active">内容1</li>
+            <li>内容2</li>
+            <li>内容3</li>
+        </ul>
+    </div>
+    <script>
+        var tabHeader = $('.tab-header')
+        var tabHeaderLis = $$('.tab-header>li')
+        var tabContentLis = $$('.tab-content>li')
+        tabHeader.addEventListener('click',function(e){
+            if(e.target.tagName.toLowerCase() === 'li'){
+                for(var i = 0; i < tabHeader.children.length; i++){
+                    tabHeader.children[i].classList.remove('active')
+                }
+                e.target.classList.add('active')
+
+                index = [].indexOf.call(tabHeaderLis,e.target)
+                for(var i = 0; i < tabContentLis.length; i++){
+                    tabContentLis[i].classList.remove('active')
+                }
+                tabContentLis[index].classList.add('active')
+            }
+        })
+
+        function $(id){
+            return document.querySelector(id)
+        }
+        function $$(cls){
+            return document.querySelectorAll(cls)
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>弹窗</title>
+    <style>
+        * {
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .clearfix:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        .box {
+            width: 400px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            z-index: 100;
+            background-color: white;
+        }
+
+        .btn {
+            padding: 5px 10px;
+            margin: 10px;
+        }
+
+        .back-ground {
+            background-color: rgba(0, 0, 0, 0.3);
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            display: none;
+            z-index: 99;
+        }
+
+        .box-header {
+            border-bottom: 2px solid #ccc;
+            padding: 10px;
+        }
+
+        .box-header>a {
+            position: absolute;
+            right: 10px;
+            top: 3px;
+            font-size: 25px;
+        }
+
+        .box-content {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .box-footer {
+            padding: 10px;
+        }
+
+        .box-footer>a {
+            float: right;
+            padding: 0 5px 0 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <button class="btn">弹窗</button>
+    </div>
+    <div class="back-ground"></div>
+    <div class="box">
+        <div class="box-header">
+            <h3>我是标题</h3>
+            <a href="#" class="close">×</a>
+        </div>
+        <div class="box-content">
+            <p>我是内容</p>
+            <p>我是内容</p>
+        </div>
+        <div class="box-footer clearfix">
+            <a href="#">确定</a>
+            <a href="#" class="cancel">取消</a>
+        </div>
+    </div>
+    <script>
+        function $(id) {
+            return document.querySelector(id);
+        }
+
+        var btn = $('.btn');
+        var box = $('.box');
+        var close = $('.close');
+        var cancel = $('.cancel');
+        var back = $('.back-ground');
+
+        btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            box.style.display = 'block';
+            back.style.display = 'block';
+        });
+
+        box.addEventListener('click', function (e) {
+            e.stopPropagation();
+        });
+
+        window.addEventListener('click', function (e) {
+            box.style.display = 'none';
+            back.style.display = 'none';
+        });
+
+        close.addEventListener('click', function (e) {
+            box.style.display = 'none';
+            back.style.display = 'none';
+        });
+
+        cancel.addEventListener('click', function (e) {
+            box.style.display = 'none';
+            back.style.display = 'none';
+        });
+    </script>
+</body>
+
+</html>

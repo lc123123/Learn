@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .clearfix:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .nav-aside {
+            background-color: red;
+            width: 200px;
+            padding: 10px;
+        }
+
+        .lists li {
+            width: 55px;
+            float: left;
+            padding: 10px 20px;
+        }
+
+        .category {
+            position: relative;
+        }
+
+        .get-into {
+            position: absolute;
+            top: 0;
+            right: 5px;
+            color: #fff;
+        }
+
+        .category .title {
+            display: block;
+            font-size: 14px;
+            margin: 0 10px;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .lists {
+            position: absolute;
+            top: 0;
+            left: 210px;
+            background: #fff;
+            border: 1px solid #ccc;
+            width: 210px;
+            display: none;
+            font-size: 12px;
+        }
+
+        .category.hover .lists {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navber">
+        <ul class="nav-aside">
+            <li class="category">
+                <a class="title" href="#">珠宝玉器</a>
+                <span class="get-into">></span>
+                <ul class="lists">
+                    <li>翡翠</li>
+                    <li>玉石</li>
+                    <li>宝石</li>
+                    <li>水晶</li>
+                    <li>玛瑙</li>
+                    <li>珍珠</li>
+                    <li>钻石</li>
+                    <li>琥珀</li>
+                    <li>和田</li>
+                    <li>琥珀</li>
+                </ul>
+            </li>
+            <li class="category">
+                <a class="title" href="#">珠宝玉器</a>
+                <span class="get-into">></span>
+                <ul class="lists">
+                    <li>翡翠</li>
+                    <li>玉石</li>
+                    <li>宝石</li>
+                    <li>水晶</li>
+                    <li>玛瑙</li>
+                    <li>珍珠</li>
+                </ul>
+            </li>
+            <li class="category">
+                <a class="title" href="#">珠宝玉器</a>
+                <span class="get-into">></span>
+                <ul class="lists">
+                    <li>翡翠</li>
+                    <li>玉石</li>
+                    <li>宝石</li>
+                    <li>水晶</li>
+                    <li>玛瑙</li>
+                    <li>珍珠</li>
+                    <li>钻石</li>
+                    <li>琥珀</li>
+                </ul>
+            </li>
+            <li class="category">
+                <a class="title" href="#">珠宝玉器</a>
+                <span class="get-into">></span>
+                <ul class="lists">
+                    <li>翡翠</li>
+                    <li>玉石</li>
+                    <li>宝石</li>
+                    <li>水晶</li>
+                    <li>玛瑙</li>
+                    <li>珍珠</li>
+                </ul>
+            </li>
+            <li class="category">
+                <a class="title" href="#">珠宝玉器</a>
+                <span class="get-into">></span>
+                <ul class="lists">
+                    <li>翡翠</li>
+                    <li>玉石</li>
+                    <li>宝石</li>
+                    <li>水晶</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+    <script>
+        $('.category').on('mouseover', function () {
+            $(this).addClass('hover')
+        })
+        $('.category').on('mouseout', function () {
+            $(this).removeClass('hover')
+        })
+    </script>
+</body>
+
+</html>

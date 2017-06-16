@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul,li,p,h3,html,body{
+            margin: 0;
+            padding:0;
+        }
+        li{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+        }
+        .layout{
+            width: 600px;
+            margin: 0 auto;
+        }
+        .clearfix{
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .item{
+            margin-top: 20px;
+        }
+        .item img{
+            width: 50px;
+            height: 50px;
+            float: left;
+        }
+        .item h3{
+            margin-left: 60px;
+            font-size: 14px;
+            color: black;
+        }
+        .item p{
+            margin-left: 60px;
+            font-size: 14px;
+            margin-top: 10px;
+            color: #ccc;
+        }
+        .load-more{
+            margin-top: 20px;
+            margin-left: -50px;
+            border-radius: 4px;
+            background: orangered;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layout">
+        <ul class="ct">
+            <li class="item clearfix">
+                <a href="http://view.inews.qq.com/a/20160830A02SEB00">
+                    <img src="http://inews.gtimg.com/newsapp_ls/0/531730377_150120/0" alt="">
+                    <h3>中国轰6K研发险些被俄罗斯发动机厂商卡脖子</h3>
+                    <p>近日，轰6K＂战神＂轰炸机首次公开亮相。在中国...</p>
+                </a>
+            </li>
+            <li class="item">
+                <a href="http://xw.qq.com/mil/20160830028700/MIL2016083002870002">
+                    <img src="http://inews.gtimg.com/newsapp_ls/0/531644649_150120/0" alt="">
+                    <h3>外媒称中国已经决心造出世界先进的航空发动机</h3>
+                    <p>资料图：2012年11月14日，第九届中国国际...</p>
+                </a>
+            </li>    
+        </ul>
+        <button href="#" class="load-more">加载更多</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+
+    <script>
+        var pageIdex = 0;
+        $('.load-more').on('click',function(){
+            $.get('/getNews',{page: pageIdex}).done(function(ret){
+                if(ret.status === 0){
+                    pageIdex++;
+                    appendHtml(ret.data)
+                }else{
+                    alert('获取新闻失败')
+                }                
+            }).fail(function(){
+                alert('系统异常')
+            })
+        })
+
+        function appendHtml(news){
+            if(news.length === 0){
+                $('.load-more').remove()
+                $('.ct').append('<p>没有更多数据了</p>')
+                return;
+            }
+            var htmls = '';
+            $.each(news,function(){
+                htmls += '<li class="item">';
+                htmls += '<a href="'+this.link+'">';
+                htmls += '<img src="'+this.img+'" alt="">';
+                htmls += '<h3>'+this.title+'</h3>';
+                htmls += '<p>'+this.brif+'</p>';
+                htmls += '</a>';
+                htmls += '</li>' 
+            })
+            $('.ct').append(htmls)
+        }
+    </script>
+</body>
+
+</html>

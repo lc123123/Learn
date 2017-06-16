@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>tab切换</title>
+
+    <style>
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .clearfix:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .ct {
+            margin-top: 20px;
+            position: relative;
+            width: 786px;
+            margin: 0 auto;
+        }
+
+        .ct-content>li {
+            float: left;
+            width: 200px;
+            padding: 10px 20px;
+            border: 1px solid #eee;
+            text-align: center;
+            margin: 10px;
+        }
+
+        .ct-content .produts-price {
+            color: red;
+        }
+
+        .active {
+            display: block;
+        }
+
+        .ct-content li {
+            position: relative;
+        }
+
+        .ct-content li .cover {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: all 0.5s;
+        }
+
+        .ct-content .buy {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            text-align: center;
+            padding: 15px 20px;
+            border-radius: 3px;
+            color: red;
+        }
+
+        .ct-content li.hover .cover {
+            opacity: 1;
+        }
+
+        .title {
+            font-size: 30px;
+            margin-left: 10px;
+            color: #b91;
+        }
+
+        .btn-add {
+            display: inline-block;
+            text-align: center;
+            margin: 0 auto;
+            margin-left: 10px;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px 20px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ct">
+        <h1 class="title">珠宝首饰</h1>
+        <ul class="ct-content active clearfix">
+            <li>
+                <div class="cover"><a class="buy" href="#">立即抢购</a></div>
+                <img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg" alt="">
+                <p class="produts-name">藏美千足金和田玉金镶玉路路通吊坠</p>
+                <p class="produts-price">￥1699.00</p>
+            </li>
+            <li>
+                <div class="cover"><a class="buy" href="#">立即抢购</a></div>
+                <img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg" alt="">
+                <p class="produts-name">藏美千足金和田玉金镶玉路路通吊坠</p>
+                <p class="produts-price">￥1699.00</p>
+            </li>
+            <li>
+                <div class="cover"><a class="buy" href="#">立即抢购</a></div>
+                <img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg" alt="">
+                <p class="produts-name">藏美千足金和田玉金镶玉路路通吊坠</p>
+                <p class="produts-price">￥1699.00</p>
+            </li>
+            <li>
+                <div class="cover"><a class="buy" href="#">立即抢购</a></div>
+                <img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg" alt="">
+                <p class="produts-name">藏美千足金和田玉金镶玉路路通吊坠</p>
+                <p class="produts-price">￥1699.00</p>
+            </li>
+            <li>
+                <div class="cover"><a class="buy" href="#">立即抢购</a></div>
+                <img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg" alt="">
+                <p class="produts-name">藏美千足金和田玉金镶玉路路通吊坠</p>
+                <p class="produts-price">￥1699.00</p>
+            </li>
+            <li>
+                <div class="cover"><a class="buy" href="#">立即抢购</a></div>
+                <img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg" alt="">
+                <p class="produts-name">藏美千足金和田玉金镶玉路路通吊坠</p>
+                <p class="produts-price">￥1699.00</p>
+            </li>
+        </ul>
+        <a class="btn-add" href="#">添加</a>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+    <script>
+        var products = [
+            {
+                img: 'http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg',
+                name: '珂兰 黄金手 猴哥款',
+                price: '￥405.00'
+            }, {
+                img: 'http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg',
+                name: '珂兰 黄金转运珠 猴哥款',
+                price: '￥100.00'
+            }, {
+                img: 'http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg',
+                name: '珂兰 黄金手链 3D猴哥款',
+                price: '￥45.00'
+            }
+        ];
+
+        function getHtml(prod) {
+            var html = '';
+            html += '<li>'
+            html += '<div class="cover"><a class="buy" href="#"> 立即抢购 </a></div>'
+            html += '<img src='+prod.img+'>'
+            html += '<p class="produts-name">'+prod.name+'</p>'
+            html += '<p class="produts-price">'+prod.price+'</p>'
+            html += '</li>'
+            return html;
+        }
+
+        $('.btn-add').on('click', function () {
+            $.each(products, function (index, prod) {
+                var html = getHtml(prod)
+                $('.ct-content').append(html)
+            })
+        })
+
+
+        $('.ct-content').on('mouseover','li', function () {
+            $(this).addClass('hover')
+        })
+        $('.ct-content').on('mouseleave','li', function () {
+            $(this).removeClass('hover')
+        })
+
+        $('.ct').on('click','a',function (e) {
+            e.preventDefault()
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>图片懒加载</title>
+</head>
+<style>
+
+    ul,
+    li {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .content li {
+        float: left;
+        margin: 10px;
+    }
+    
+    .content li img {
+        width: 400px;
+        height: 400px;
+    }
+    
+    .content::after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+    
+    .content {
+        width: 840px;
+        margin: 0 auto;
+    }
+</style>
+
+<body>
+    <ul class="content">
+        <li>
+            <a href="#">
+                <img src="" data-src="http://ww4.sinaimg.cn/large/006HJ39wgy1ffvejiyse7j30b40b40tm.jpg" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img src="" data-src="http://ww1.sinaimg.cn/large/006HJ39wgy1ffvejj4lf6j30b40b4q35.jpg" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img src="" data-src="http://ww2.sinaimg.cn/large/006HJ39wgy1ffvejjxw7yj30b40b4gmh.jpg" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img src="" data-src="http://ww3.sinaimg.cn/large/006HJ39wgy1ffvejni2vhj30b40b4q6o.jpg" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img src="" data-src="http://ww1.sinaimg.cn/large/006HJ39wgy1ffvejk61okj30b40b4myi.jpg" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img src="" data-src="http://ww2.sinaimg.cn/large/006HJ39wgy1ffvejkedi0j30b40b40uf.jpg" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img src="" data-src="http://ww1.sinaimg.cn/large/006HJ39wgy1ffvejkse1aj30b40b440j.jpg" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img src="" data-src="http://ww4.sinaimg.cn/large/006HJ39wgy1ffvejlebmij30b40b4gn2.jpg" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img src="" data-src="http://ww3.sinaimg.cn/large/006HJ39wgy1ffvejkv4hfj30b40b40u8.jpg" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img src="" data-src="http://ww4.sinaimg.cn/large/006HJ39wgy1ffvejlqrzgj30b40b4gn8.jpg" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img src="" data-src="http://ww1.sinaimg.cn/large/006HJ39wgy1ffvejmfmfgj30b40b4tjt.jpg" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img src="" data-src="http://ww1.sinaimg.cn/large/006HJ39wgy1ffvejmq9qxj30b40b43zg.jpg" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img src="" data-src="http://ww1.sinaimg.cn/large/006HJ39wgy1ffvejmnkdmj30b40b43zs.jpg" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img src="" data-src="http://ww1.sinaimg.cn/large/006HJ39wgy1ffvejmxr75j30b40b4dg8.jpg" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img src="" data-src="http://ww4.sinaimg.cn/large/006HJ39wgy1ffvejmulb1j30b40b4t9v.jpg" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img src="" data-src="http://ww1.sinaimg.cn/large/006HJ39wgy1ffvejn4wt4j30b40b4gma.jpg" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img src="" data-src="http://ww3.sinaimg.cn/large/006HJ39wgy1ffvejni2vhj30b40b4q6o.jpg" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img src="" data-src="http://ww4.sinaimg.cn/large/006HJ39wgy1ffvejo0xpyj30b40b4tg9.jpg" alt="">
+            </a>
+        </li>
+    </ul>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+
+    <script>
+        check()
+
+        $(window).on('scroll', check)
+
+        function check() {
+            $('.content img').not('.load').each(function () {
+                if (isVisible($(this))) {
+                    showImg($(this))
+                }
+            })
+        }
+
+        function isVisible($node) {
+            var windowHeight = $(window).height(),
+                scrollTop = $(window).scrollTop(),
+                offsetTop = $node.offset().top,
+                nodeHeight = $node.outerHeight(true);
+
+            if (windowHeight + scrollTop > offsetTop && scrollTop < offsetTop + nodeHeight) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function showImg($imgs) {
+            $imgs.each(function () {
+                var imgUrl = $(this).attr('data-src')
+                $(this).attr('src', imgUrl)
+                $(this).addClass('load')
+            })
+        }
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+<!--
+    windowHeight(窗口高度) + scrollTop(滚动距离) > offsetTop(元素顶部到页面顶部的距离)
+scrollTop(滚动距离) < offsetTop(元素顶部到页面顶部的距离) + nodeHeight(元素本身高度)
+
+function isVisible($node){
+    var windowHeight = $(window).height(),
+        scrollTop = $(window).scrollTop(),
+        offsetTop = $node.offset().top,
+        nodeHeight = $node.outerHeight(true);
+
+     if(windowHeight + scrollTop > offsetTop && scrollTop < offsetTop + nodeHeight){
+         return true;
+     }else{
+         return false;
+     }
+}
+
+$(window).on('scroll',function(){
+    if(isVisible($node)){
+        console.log('true')
+    }
+})
+
+$(window).on('scroll',function(){
+    if(isVisible($node.not('.show'))){
+        console.log('true')
+        $(this).addClass('show')
+    }
+})
+-->

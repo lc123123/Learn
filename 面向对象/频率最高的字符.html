@@ -1,0 +1,26 @@
+<script>
+    String.prototype.getMostOften = function(){
+        var obj = {};
+        var count = 0;
+        var max
+        for(var i = 0; i < this.length; i++){
+            if(obj[this[i]]){
+                obj[this[i]]++
+            }else{
+                obj[this[i]] = 1
+            }
+        }
+        for(var key in obj){
+            if(obj[key]>count){
+                count = obj[key]
+                max = key
+            }
+        }
+        return max+',因为'+max+'出现了'+count+'次'
+    }
+
+    var str = 'ahbbccdeddddfg';
+    var ch = str.getMostOften();
+    console.log(ch); //d , 因为d 出现了5次
+
+</script>

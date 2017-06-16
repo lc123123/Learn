@@ -1,0 +1,113 @@
+<!--题目1: 下面的代码输出多少？修改代码让 fnArr[i]() 输出 i。使用 两种以上的方法-->
+<script>
+    var fnArr = [];
+    for (var i = 0; i < 10; i++) {
+        fnArr[i] = function () {
+            return i;
+        };
+    }
+    console.log(fnArr[3]());
+    //输出10
+    //修改
+    var fnArr = [];
+    for (var i = 0; i < 10; i++) {
+        (function (n) {
+            fnArr[i] = function () {
+                return n;
+            };
+        })(i)
+    }
+    console.log(fnArr[3]());
+
+    var fnArr = [];
+    for (var i = 0; i < 10; i++) {
+        (function () {
+            var s = i
+            fnArr[i] = function () {
+                return s;
+            };
+        })()
+    }
+    console.log(fnArr[3]());
+
+    for (var i = 0; i < 10; i++) {
+        fnArr[i] = (function () {
+            return function () {
+                return i;
+            }
+        })(i);
+    }
+    console.log(fnArr[3]());
+
+
+//下面这段代码输出？如何输出delayer: 0, delayer:1...（使用闭包来实现）
+for(var i=0;i<5;i++){
+	setTimeout(function(){
+         console.log('delayer:' + i );
+	}, 0);
+	console.log(i);
+}//输出 0,1,2,3,4最后5次5
+
+for(var i=0;i<5;i++){
+    (function(i){
+	return setTimeout(function(){
+         console.log('delayer:' + i );
+	}, 0);
+    })(i)
+	console.log(i);
+}
+</script>
+
+<script>
+function isAndroid(){
+    return /android/i.test(window.navigator.userAgent)
+}
+funcnction isIphone(){
+    return /iphone/i.test(window.navigator.userAgent)
+}
+function isIpad(){
+    return /ipad/i.test(window.navigator.userAgent)
+}
+function isIOS(){
+    return /(ipad)|(iphone)/i.test(window.navigator.userAgent)
+}
+
+
+
+var Car = (function(){
+   var speed = 0;
+   function setSpeed(s){
+       speed = s
+   }
+   function getSpeed(){
+       return speed
+   }
+   function accelerate(){
+       return speed += 10
+   }
+   function decelerate(){
+       return speed > 0 ? speed -= 10 :speed
+   }
+   function getStatus(){
+       return speed >= 0 ? "running" : "stop"
+   }
+   return {
+      "setSpeed": setSpeed,
+      "getSpeed": getSpeed,
+      "accelerate": accelerate,
+      "decelerate": decelerate,
+      "getStatus": getStatus
+   }
+})()
+Car.setSpeed(30);
+Car.getSpeed(); //30
+Car.accelerate();
+Car.getSpeed(); //40;
+Car.decelerate();
+Car.decelerate();
+Car.getSpeed(); //20
+Car.getStatus(); // 'running';
+Car.decelerate(); 
+Car.decelerate();
+Car.getStatus();  //'stop';
+//Car.speed;  //error
