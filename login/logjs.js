@@ -11,19 +11,15 @@ function logout() {
 }
 
 function loginSuccess(url) {
-    localStorage.setItem('username',this.username)
-    localStorage.setItem('password',this.password)
     window.location = url
 }
 
 function logoutSuccess(url) {
-    localStorage.removeItem('username')
-    localStorage.removeItem('password')
     window.location = url
 }
 
 function check() {
-    if (window.localStorage.key('username') === null && window.localStorage.key('password') === null) {
+    if (window.localStorage.getItem('username') === null && window.localStorage.getItem('password') === null) {
         console.log('true')
         return true     
     } else {

@@ -29,6 +29,8 @@
             var username = $('#username').val()
             var password = $('input[type="password"]').val()
             if(login(username,password)){
+                localStorage.setItem('username',username)
+                localStorage.setItem('password',password)
                 logoutSuccess('./mymain.html')
             }else{
                 alert('用户名或密码错误')
